@@ -62,6 +62,7 @@ fun FavoritesComposable() {
                                 .clickable {
                                     val intent = Intent(context, FactActivity::class.java)
                                     intent.putExtra("fact", fact)
+                                    intent.putExtra("fromPage", AppMain.favoritesFactsPageTag)
                                     Log.d(
                                         "FavoritesComposable:Card:Row:Text",
                                         "Starting FactActivity and passing $fact as fact"

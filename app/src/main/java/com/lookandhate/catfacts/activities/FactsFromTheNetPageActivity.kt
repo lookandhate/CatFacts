@@ -127,6 +127,7 @@ fun FactsFromTheNetComposable() {
                                 // Passing selected fact to activity
 
                                 intent.putExtra("fact", fact)
+                                intent.putExtra("fromPage", AppMain.factsFromTheNetPageTag)
                                 Log.d(
                                     "FactsFromTheNetComposable:Card:Row:Text",
                                     "Starting FactActivity and passing $fact as fact"

@@ -1,6 +1,7 @@
 package com.lookandhate.catfacts
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -27,11 +28,16 @@ object AppMain {
         }
         return -1
     }
+    const val factsFromTheNetPageTag = "download"
+    const val favoritesFactsPageTag = "favorites"
 }
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val pageToDisplay: String = intent.getStringExtra("pageToDisplay") ?: AppMain.factsFromTheNetPageTag
+        Log.d("MainActivity",
+        "pageToDisplay is ${intent.getStringExtra("pageToDisplay")}")
         setContent {
             CatFactsTheme {
                 // A surface container using the 'background' color from the theme
@@ -39,7 +45,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MainScreen()
+                    MainScreen(pageToDisplay)
                 }
             }
         }
@@ -47,12 +53,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen() {
+fun MainScreen(displayingPage: String = "download") {
     val context = LocalContext.current
-    val selectedItem = remember { mutableStateOf("download") }
+    val selectedItem = remember { mutableStateOf(displayingPage) }
 
-    val factsFromTheNetPageTag = "download"
-    val favoritesFactsPageTag = "favorites"
+
     Scaffold(
         bottomBar = {
             BottomAppBar {
@@ -63,14 +68,14 @@ fun MainScreen() {
                             Icon(Icons.Filled.ArrowDropDown, "")
                         },
                         label = { Text(text = "Facts") },
-                        selected = selectedItem.value == factsFromTheNetPageTag,
+                        selected = selectedItem.value == AppMain.factsFromTheNetPageTag,
                         onClick = {
                             Toast.makeText(
                                 context,
                                 "Facts from the net clicked",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            selectedItem.value = factsFromTheNetPageTag
+                            selectedItem.value = AppMain.factsFromTheNetPageTag
 
                         },
                         alwaysShowLabel = false
@@ -83,18 +88,18 @@ fun MainScreen() {
                         label = { Text(text = "Favorite") },
                         onClick = {
                             Toast.makeText(context, "Favorite clicked", Toast.LENGTH_SHORT).show()
-                            selectedItem.value = favoritesFactsPageTag
+                            selectedItem.value = AppMain.favoritesFactsPageTag
                         },
-                        selected = selectedItem.value == favoritesFactsPageTag,
+                        selected = selectedItem.value == AppMain.favoritesFactsPageTag,
                         alwaysShowLabel = false
                     )
                 }
             }
         },
         content = {
-            if (selectedItem.value == factsFromTheNetPageTag) {
+            if (selectedItem.value == AppMain.factsFromTheNetPageTag) {
                 FactsFromTheNetComposable()
-            } else if (selectedItem.value == favoritesFactsPageTag) {
+            } else if (selectedItem.value == AppMain.favoritesFactsPageTag) {
                 FavoritesComposable()
             }
         }
