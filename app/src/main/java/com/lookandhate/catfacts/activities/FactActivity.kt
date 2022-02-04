@@ -20,14 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import coil.request.ImageRequest.Builder.*
 import com.lookandhate.catfacts.AppMain
+import com.lookandhate.catfacts.R
 import com.lookandhate.catfacts.MainActivity
 import com.lookandhate.catfacts.activities.ui.theme.CatFactsTheme
 import com.lookandhate.catfacts.viewModels.Fact
 import okhttp3.*
-import okhttp3.internal.wait
-import org.intellij.lang.annotations.JdkConstants
-import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
@@ -122,10 +121,12 @@ fun FactPage(factToDispay: Fact?, imageUrl: String?) {
         Text(text = fact.factText)
 
         Image(
-            painter = rememberImagePainter(imageUrl),
+            painter = rememberImagePainter(imageUrl,
+                builder = { placeholder(R.drawable.downloading_indicator) }),
             contentDescription = null,
-            modifier = Modifier.size(600.dp)
-        )
+            modifier = Modifier.size(800.dp),
+
+            )
     }
     Row(
         horizontalArrangement = Arrangement.Center,
