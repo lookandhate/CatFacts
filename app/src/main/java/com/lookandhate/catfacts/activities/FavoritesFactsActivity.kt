@@ -9,6 +9,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -55,10 +57,11 @@ fun FavoritesComposable() {
                 ) {
                     Row {
                         val context = LocalContext.current
+                        Icon(Icons.Filled.Favorite, "favorite")
                         Text(
                             text = fact.factText,
                             modifier = Modifier
-                                .width(350.dp)
+                                .width(400.dp)
                                 .clickable {
                                     val intent = Intent(context, FactActivity::class.java)
                                     intent.putExtra("fact", fact)

@@ -9,6 +9,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -111,21 +114,26 @@ fun FactsFromTheNetComposable() {
 
             ) {
                 Row {
+
                     val checkedState = remember { mutableStateOf(fact.isFavorite) }
                     // Context of current activity that we will use on FactActivity launch
 
                     val context = LocalContext.current
+                    if(checkedState.value)
+                        Icon(Icons.Outlined.Favorite, "favorite")
+                    else
+                        Icon(Icons.Filled.Favorite, "favorite")
                     Text(
                         text = fact.factText,
                         modifier = Modifier
-                            .width(350.dp)
+                            .width(400.dp)
                             .clickable {
                                 // Launching Fact activity
 
                                 // Creating intent for activity to start
                                 val intent = Intent(context, FactActivity::class.java)
-                                // Passing selected fact to activity
 
+                                // Passing selected fact to activity
                                 intent.putExtra("fact", fact)
                                 intent.putExtra("fromPage", AppMain.factsFromTheNetPageTag)
                                 Log.d(
@@ -138,26 +146,9 @@ fun FactsFromTheNetComposable() {
 
                             }
                     )
-
-                    Switch(
-                        checked = checkedState.value,
-                        onCheckedChange = {
-                            fact.isFavorite = !fact.isFavorite;
-                            checkedState.value = fact.isFavorite;
-                            Log.d(
-                                "FactsFromTheNetComposable:Row",
-                                "Changing state of $fact is $it"
-                            )
-                        }
-                    )
                 }
             }
         }
-        Button(
-            onClick = { updateListOfFacts(AppMain.factList) },
-            content = { Text("Click me") }
-
-        )
     }
 
 }
