@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.lookandhate.catfacts">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CatFacts"
         tools:targetApi="31">
+        <activity
+            android:name=".activities.FactActivity"
+            android:exported="false"
+            android:label="@string/title_activity_fact"
+            android:theme="@style/Theme.CatFacts" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
