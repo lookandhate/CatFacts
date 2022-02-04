@@ -13,7 +13,6 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import com.lookandhate.catfacts.activities.FactsFromTheNetComposable
 import com.lookandhate.catfacts.activities.FavoritesComposable
 import com.lookandhate.catfacts.ui.theme.CatFactsTheme
@@ -22,7 +21,7 @@ import com.lookandhate.catfacts.viewModels.Fact
 object AppMain {
     var factList by mutableStateOf(mutableListOf<Fact>())
     fun getFactIndexByItsText(text: String): Int {
-        factList.forEach { it ->
+        factList.forEach {
             if (it.factText == text)
                 return factList.indexOf(it)
         }
@@ -104,11 +103,4 @@ fun MainScreen(displayingPage: String = "download") {
             }
         }
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    CatFactsTheme {
-    }
 }

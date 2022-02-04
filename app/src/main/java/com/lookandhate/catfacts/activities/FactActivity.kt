@@ -16,7 +16,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.lookandhate.catfacts.AppMain
@@ -29,7 +28,7 @@ import org.json.JSONObject
 import java.io.IOException
 
 
-fun TextForButton(state: Boolean) =
+fun textForButton(state: Boolean) =
     if (!state)
         "Add to favorites"
     else "Remove from favorites"
@@ -39,7 +38,7 @@ class FactActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Get URL for cat image
-        val client: OkHttpClient = OkHttpClient()
+        val client = OkHttpClient()
         val request = Request.Builder()
             .url("https://aws.random.cat/meow")
             .build()
@@ -133,18 +132,10 @@ fun FactPage(factToDispay: Fact?, imageUrl: String?) {
     ) {
 
         Text(
-            text = TextForButton(checkedState.value),
+            text = textForButton(checkedState.value),
             modifier = Modifier.clickable {
                 AppMain.factList[factIndexInArray].isFavorite = !checkedState.value
                 checkedState.value = !checkedState.value
             })
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview4() {
-    CatFactsTheme {
-
     }
 }

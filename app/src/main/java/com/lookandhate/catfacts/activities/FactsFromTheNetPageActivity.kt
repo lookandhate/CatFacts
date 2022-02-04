@@ -16,7 +16,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lookandhate.catfacts.AppMain
 import com.lookandhate.catfacts.ui.theme.CatFactsTheme
@@ -27,7 +26,7 @@ import java.io.IOException
 
 
 internal fun updateListOfFacts(facts: MutableList<Fact>) {
-    val client: OkHttpClient = OkHttpClient()
+    val client = OkHttpClient()
     val request = Request.Builder()
         .url("https://cat-fact.herokuapp.com/facts")
         .build()
@@ -151,12 +150,4 @@ fun FactsFromTheNetComposable() {
         }
     }
 
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview2() {
-    CatFactsTheme {
-        FactsFromTheNetComposable()
-    }
 }

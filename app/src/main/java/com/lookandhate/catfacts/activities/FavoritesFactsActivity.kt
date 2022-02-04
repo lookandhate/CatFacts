@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lookandhate.catfacts.AppMain
 import com.lookandhate.catfacts.ui.theme.CatFactsTheme
@@ -78,13 +77,5 @@ fun FavoritesComposable() {
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview3() {
-    CatFactsTheme {
-        FavoritesComposable()
     }
 }
