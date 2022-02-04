@@ -2,7 +2,7 @@ package com.lookandhate.catfacts
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -69,11 +69,6 @@ fun MainScreen(displayingPage: String = "download") {
                         label = { Text(text = "Facts") },
                         selected = selectedItem.value == AppMain.factsFromTheNetPageTag,
                         onClick = {
-                            Toast.makeText(
-                                context,
-                                "Facts from the net clicked",
-                                Toast.LENGTH_SHORT
-                            ).show()
                             selectedItem.value = AppMain.factsFromTheNetPageTag
 
                         },
@@ -86,7 +81,6 @@ fun MainScreen(displayingPage: String = "download") {
                         },
                         label = { Text(text = "Favorite") },
                         onClick = {
-                            Toast.makeText(context, "Favorite clicked", Toast.LENGTH_SHORT).show()
                             selectedItem.value = AppMain.favoritesFactsPageTag
                         },
                         selected = selectedItem.value == AppMain.favoritesFactsPageTag,
