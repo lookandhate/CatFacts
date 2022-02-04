@@ -112,18 +112,27 @@ fun FactsFromTheNetComposable() {
             ) {
                 Row {
                     val checkedState = remember { mutableStateOf(fact.isFavorite) }
+                    // Context of current activity that we will use on FactActivity launch
+
                     val context = LocalContext.current
                     Text(
                         text = fact.factText,
                         modifier = Modifier
                             .width(350.dp)
                             .clickable {
+                                // Launching Fact activity
+
+                                // Creating intent for activity to start
                                 val intent = Intent(context, FactActivity::class.java)
+                                // Passing selected fact to activity
+
                                 intent.putExtra("fact", fact)
                                 Log.d(
                                     "FactsFromTheNetComposable:Card:Row:Text",
                                     "Starting FactActivity and passing $fact as fact"
                                 )
+
+                                // Starting Activity
                                 context.startActivity(intent)
 
                             }
