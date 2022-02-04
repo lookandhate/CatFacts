@@ -1,9 +1,11 @@
 package com.lookandhate.catfacts.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -12,6 +14,8 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -107,15 +111,26 @@ fun PlaceholderFactsFromTheNetComposable() {
             Card(
                 shape = RoundedCornerShape(3.dp),
                 modifier = Modifier.padding(3.dp),
-
                 backgroundColor = Color.DarkGray
+
             ) {
                 Row {
                     val checkedState = remember { mutableStateOf(fact.isFavorite) }
+                    val context = LocalContext.current
                     Text(
                         text = fact.factText,
-                        modifier = Modifier.width(350.dp)
+                        modifier = Modifier
+                            .width(350.dp)
+                            .clickable {
+                                val intent = Intent(context, FactActivity::class.java)
+                                intent.putExtra("fact", fact)
+                                Log.d("PlaceholderFactsFromTheNetComposable:Card:Row:Text",
+                                    "Starting FactActivity and passing $fact as fact")
+                                context.startActivity(intent)
+
+                            }
                     )
+
                     Switch(
                         checked = checkedState.value,
                         onCheckedChange = {
