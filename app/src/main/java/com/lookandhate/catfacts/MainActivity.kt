@@ -1,7 +1,6 @@
 package com.lookandhate.catfacts
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,10 +13,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import com.lookandhate.catfacts.activities.FactsFromTheNetPageActivity
-import com.lookandhate.catfacts.activities.FavoritesFactsActivity
-import com.lookandhate.catfacts.activities.PlaceholderFactsFromTheNetComposable
-import com.lookandhate.catfacts.activities.PlaceholderFavoritesComposable
+import com.lookandhate.catfacts.activities.FactsFromTheNetComposable
+import com.lookandhate.catfacts.activities.FavoritesComposable
 import com.lookandhate.catfacts.ui.theme.CatFactsTheme
 import com.lookandhate.catfacts.viewModels.Fact
 
@@ -94,9 +91,9 @@ fun MainScreen() {
         },
         content = {
             if (selectedItem.value == factsFromTheNetPageTag) {
-                PlaceholderFactsFromTheNetComposable()
+                FactsFromTheNetComposable()
             } else if (selectedItem.value == favoritesFactsPageTag) {
-                PlaceholderFavoritesComposable()
+                FavoritesComposable()
             }
         }
     )

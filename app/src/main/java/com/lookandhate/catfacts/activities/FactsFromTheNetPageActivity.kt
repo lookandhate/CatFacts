@@ -9,14 +9,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lookandhate.catfacts.AppMain
@@ -39,7 +35,7 @@ internal fun updateListOfFacts(facts: MutableList<Fact>) {
 
         override fun onResponse(call: Call, response: Response) {
             response.use {
-                Log.i("PlaceholderFactsFromTheNetComposable", "onResponse invoked")
+                Log.i("updateListOfFacts", "onResponse invoked")
                 val arr = JSONArray(response.body!!.string())
 
                 for (i in 0 until arr.length()) {
@@ -47,7 +43,7 @@ internal fun updateListOfFacts(facts: MutableList<Fact>) {
                     val jsonObject = arr.getJSONObject(i)
                     val catFact = jsonObject.getString("text")
                     Log.d(
-                        "PlaceholderFactsFromTheNetComposable",
+                        "updateListOfFacts",
                         "adding $catFact to facts"
                     )
                     if (!facts.any { existedFact -> existedFact.factText == catFact })
@@ -56,7 +52,7 @@ internal fun updateListOfFacts(facts: MutableList<Fact>) {
 
                 }
                 Log.d(
-                    "PlaceholderFactsFromTheNetComposable",
+                    "updateListOfFacts",
                     "on response, facts state: ${facts.joinToString(", ")}"
                 )
             }
@@ -83,7 +79,7 @@ class FactsFromTheNetPageActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    PlaceholderFactsFromTheNetComposable()
+                    FactsFromTheNetComposable()
                 }
             }
         }
@@ -91,11 +87,11 @@ class FactsFromTheNetPageActivity : ComponentActivity() {
 }
 
 @Composable
-fun PlaceholderFactsFromTheNetComposable() {
+fun FactsFromTheNetComposable() {
     // Todo: fix data not saving after change of the screen(after redraw)
     val needToUpdateTheList: Boolean = checkListNeedsToBeUpdated(AppMain.factList)
     Log.d(
-        "PlaceholderFactsFromTheNetComposable",
+        "FactsFromTheNetComposable",
         "Checking, do we need to update list with facts: $needToUpdateTheList"
     )
     if (needToUpdateTheList) {
@@ -104,7 +100,7 @@ fun PlaceholderFactsFromTheNetComposable() {
     Column {
         //Text(text = text.value)
         Log.d(
-            "PlaceholderFactsFromTheNetComposable",
+            "FactsFromTheNetComposable",
             "OnRedraw, facts state: ${AppMain.factList.joinToString(", ")}"
         )
         AppMain.factList.forEach { fact ->
@@ -124,8 +120,10 @@ fun PlaceholderFactsFromTheNetComposable() {
                             .clickable {
                                 val intent = Intent(context, FactActivity::class.java)
                                 intent.putExtra("fact", fact)
-                                Log.d("PlaceholderFactsFromTheNetComposable:Card:Row:Text",
-                                    "Starting FactActivity and passing $fact as fact")
+                                Log.d(
+                                    "FactsFromTheNetComposable:Card:Row:Text",
+                                    "Starting FactActivity and passing $fact as fact"
+                                )
                                 context.startActivity(intent)
 
                             }
@@ -137,7 +135,7 @@ fun PlaceholderFactsFromTheNetComposable() {
                             fact.isFavorite = !fact.isFavorite;
                             checkedState.value = fact.isFavorite;
                             Log.d(
-                                "PlaceholderFactsFromTheNetComposable:Row",
+                                "FactsFromTheNetComposable:Row",
                                 "Changing state of $fact is $it"
                             )
                         }
@@ -158,6 +156,6 @@ fun PlaceholderFactsFromTheNetComposable() {
 @Composable
 fun DefaultPreview2() {
     CatFactsTheme {
-        PlaceholderFactsFromTheNetComposable()
+        FactsFromTheNetComposable()
     }
 }
