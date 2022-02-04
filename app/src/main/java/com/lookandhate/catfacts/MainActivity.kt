@@ -20,6 +20,13 @@ import com.lookandhate.catfacts.viewModels.Fact
 
 object AppMain {
     var factList by mutableStateOf(mutableListOf<Fact>())
+    fun getFactIndexByItsText(text: String): Int {
+        factList.forEach { it ->
+            if (it.factText == text)
+                return factList.indexOf(it)
+        }
+        return -1
+    }
 }
 
 class MainActivity : ComponentActivity() {
@@ -37,11 +44,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
 }
 
 @Composable
@@ -103,7 +105,5 @@ fun MainScreen() {
 @Composable
 fun DefaultPreview() {
     CatFactsTheme {
-        Greeting("Android")
-        //MainScreen()
     }
 }
