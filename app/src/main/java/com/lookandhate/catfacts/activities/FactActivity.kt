@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.lookandhate.catfacts.AppMain
@@ -28,8 +29,8 @@ import java.io.IOException
 
 fun textForButton(state: Boolean) =
     if (!state)
-        "Add to favorites"
-    else "Remove from favorites"
+        R.string.add_to_favorites
+    else R.string.remove_from_favorites
 
 class FactActivity : ComponentActivity() {
     var url: String? = null
@@ -123,7 +124,7 @@ fun FactPage(factToDispay: Fact?, imageUrl: String?) {
     ) {
 
         Text(
-            text = textForButton(checkedState.value),
+            text = stringResource(textForButton(checkedState.value)),
             modifier = Modifier.clickable {
                 AppMain.factList[factIndexInArray].isFavorite = !checkedState.value
                 checkedState.value = !checkedState.value

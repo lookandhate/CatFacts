@@ -1,9 +1,11 @@
-package com.lookandhate.catfacts.activities
+package com.lookandhate.catfacts.composables
 
 import android.content.Intent
 import android.util.Log
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -13,9 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.lookandhate.catfacts.AppMain
+import com.lookandhate.catfacts.activities.FactActivity
 import com.lookandhate.catfacts.viewModels.Fact
-
 
 @Composable
 fun FactCard(factToDisplay: Fact) {
@@ -45,23 +46,6 @@ fun FactCard(factToDisplay: Fact) {
 
                     }
             )
-        }
-    }
-}
-
-@Composable
-fun FavoritesComposable() {
-    // Todo: fix data not saving after change of the screen(after redraw)
-    Column {
-        //Text(text = text.value)
-        Log.d(
-            "FavoritesComposable",
-            "OnRedraw, facts state: ${AppMain.factList.joinToString(", ")}"
-        )
-        AppMain.factList.forEach { fact ->
-            if (fact.isFavorite) {
-                FactCard(factToDisplay = fact)
-            }
         }
     }
 }

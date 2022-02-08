@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import com.lookandhate.catfacts.AppMain
+import com.lookandhate.catfacts.composables.FactCard
 import com.lookandhate.catfacts.viewModels.Fact
 import okhttp3.*
 import org.json.JSONArray
