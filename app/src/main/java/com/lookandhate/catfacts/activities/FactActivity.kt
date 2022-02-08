@@ -21,6 +21,7 @@ import coil.compose.rememberImagePainter
 import com.lookandhate.catfacts.AppMain
 import com.lookandhate.catfacts.R
 import com.lookandhate.catfacts.activities.ui.theme.CatFactsTheme
+import com.lookandhate.catfacts.composables.FactPage
 import com.lookandhate.catfacts.viewModels.Fact
 import okhttp3.*
 import org.json.JSONObject
@@ -32,8 +33,9 @@ fun textForButton(state: Boolean) =
         R.string.add_to_favorites
     else R.string.remove_from_favorites
 
+
 class FactActivity : ComponentActivity() {
-    var url: String? = null
+    private var url: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Get URL for cat image
@@ -100,34 +102,3 @@ class FactActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun FactPage(factToDispay: Fact?, imageUrl: String?) {
-    Log.d("FactPage", "Got $factToDispay as fact")
-    val fact = factToDispay ?: Fact("Null", true)
-    val checkedState = remember { mutableStateOf(fact.isFavorite) }
-    val factIndexInArray = AppMain.getFactIndexByItsText(fact.factText)
-    Column() {
-        Text(text = fact.factText,
-        modifier = Modifier.padding(5.dp))
-
-        Image(
-            painter = rememberImagePainter(imageUrl,
-                builder = { placeholder(R.drawable.downloading_indicator) }),
-            contentDescription = null,
-            modifier = Modifier.size(800.dp),
-
-            )
-    }
-    Row(
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.Bottom
-    ) {
-
-        Text(
-            text = stringResource(textForButton(checkedState.value)),
-            modifier = Modifier.clickable {
-                AppMain.factList[factIndexInArray].isFavorite = !checkedState.value
-                checkedState.value = !checkedState.value
-            })
-    }
-}
