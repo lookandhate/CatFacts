@@ -16,7 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 
-import com.lookandhate.catfacts.activities.FactsFromTheNetComposable
+import com.lookandhate.catfacts.composables.FactsFromTheNetComposable
 import com.lookandhate.catfacts.composables.FavoritesComposable
 import com.lookandhate.catfacts.ui.theme.CatFactsTheme
 import com.lookandhate.catfacts.viewModels.Fact

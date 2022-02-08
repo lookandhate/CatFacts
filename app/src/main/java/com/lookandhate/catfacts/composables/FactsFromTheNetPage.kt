@@ -1,11 +1,10 @@
-package com.lookandhate.catfacts.activities
+package com.lookandhate.catfacts.composables
 
 
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import com.lookandhate.catfacts.AppMain
-import com.lookandhate.catfacts.composables.FactCard
 import com.lookandhate.catfacts.viewModels.Fact
 import okhttp3.*
 import org.json.JSONArray
@@ -61,7 +60,6 @@ internal fun checkListNeedsToBeUpdated(facts: MutableList<Fact>): Boolean {
 
 @Composable
 fun FactsFromTheNetComposable() {
-    // Todo: fix data not saving after change of the screen(after redraw)
     val needToUpdateTheList: Boolean = checkListNeedsToBeUpdated(AppMain.factList)
     Log.d(
         "FactsFromTheNetComposable",
