@@ -90,47 +90,7 @@ fun FactsFromTheNetComposable() {
             "OnRedraw, facts state: ${AppMain.factList.joinToString(", ")}"
         )
         AppMain.factList.forEach { fact ->
-            Card(
-                shape = RoundedCornerShape(3.dp),
-                modifier = Modifier.padding(3.dp),
-                backgroundColor = Color.DarkGray
-
-            ) {
-                Row {
-
-                    val checkedState = remember { mutableStateOf(fact.isFavorite) }
-                    // Context of current activity that we will use on FactActivity launch
-
-                    val context = LocalContext.current
-                    if(checkedState.value)
-                        Icon(Icons.Outlined.Favorite, "favorite")
-                    else
-                        Icon(Icons.Filled.Favorite, "favorite")
-                    Text(
-                        text = fact.factText,
-                        modifier = Modifier
-                            .width(400.dp)
-                            .clickable {
-                                // Launching Fact activity
-
-                                // Creating intent for activity to start
-                                val intent = Intent(context, FactActivity::class.java)
-
-                                // Passing selected fact to activity
-                                intent.putExtra("fact", fact)
-                                intent.putExtra("fromPage", AppMain.factsFromTheNetPageTag)
-                                Log.d(
-                                    "FactsFromTheNetComposable:Card:Row:Text",
-                                    "Starting FactActivity and passing $fact as fact"
-                                )
-
-                                // Starting Activity
-                                context.startActivity(intent)
-
-                            }
-                    )
-                }
-            }
+            FactCard(factToDisplay = fact)
         }
     }
 

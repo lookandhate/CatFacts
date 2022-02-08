@@ -18,6 +18,40 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.lookandhate.catfacts.AppMain
 import com.lookandhate.catfacts.ui.theme.CatFactsTheme
+import com.lookandhate.catfacts.viewModels.Fact
+
+
+@Composable
+fun FactCard(factToDisplay: Fact) {
+    Card(
+        shape = RoundedCornerShape(3.dp),
+        modifier = Modifier.padding(3.dp),
+
+        backgroundColor = Color.DarkGray
+    ) {
+        Row {
+            val context = LocalContext.current
+            Icon(Icons.Filled.Favorite, "favorite")
+            Text(
+                text = factToDisplay.factText,
+                modifier = Modifier
+                    .width(400.dp)
+                    .clickable {
+                        val intent = Intent(context, FactActivity::class.java)
+
+
+                        intent.putExtra("fact", factToDisplay)
+                        Log.d(
+                            "FavoritesComposable:Card:Row:Text",
+                            "Starting FactActivity and passing $factToDisplay as fact"
+                        )
+                        context.startActivity(intent)
+
+                    }
+            )
+        }
+    }
+}
 
 @Composable
 fun FavoritesComposable() {
@@ -30,34 +64,7 @@ fun FavoritesComposable() {
         )
         AppMain.factList.forEach { fact ->
             if (fact.isFavorite) {
-                Card(
-                    shape = RoundedCornerShape(3.dp),
-                    modifier = Modifier.padding(3.dp),
-
-                    backgroundColor = Color.DarkGray
-                ) {
-                    Row {
-                        val context = LocalContext.current
-                        Icon(Icons.Filled.Favorite, "favorite")
-                        Text(
-                            text = fact.factText,
-                            modifier = Modifier
-                                .width(400.dp)
-                                .clickable {
-                                    val intent = Intent(context, FactActivity::class.java)
-
-
-                                    intent.putExtra("fact", fact)
-                                    Log.d(
-                                        "FavoritesComposable:Card:Row:Text",
-                                        "Starting FactActivity and passing $fact as fact"
-                                    )
-                                    context.startActivity(intent)
-
-                                }
-                        )
-                    }
-                }
+                FactCard(factToDisplay = fact)
             }
         }
     }
