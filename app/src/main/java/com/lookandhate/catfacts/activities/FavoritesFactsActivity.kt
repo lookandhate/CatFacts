@@ -19,24 +19,6 @@ import androidx.compose.ui.unit.dp
 import com.lookandhate.catfacts.AppMain
 import com.lookandhate.catfacts.ui.theme.CatFactsTheme
 
-class FavoritesFactsActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        super.onCreate(savedInstanceState)
-        setContent {
-            CatFactsTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    FavoritesComposable()
-                }
-            }
-        }
-    }
-}
-
 @Composable
 fun FavoritesComposable() {
     // Todo: fix data not saving after change of the screen(after redraw)

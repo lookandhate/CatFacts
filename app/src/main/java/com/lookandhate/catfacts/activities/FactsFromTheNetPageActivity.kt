@@ -71,22 +71,6 @@ internal fun checkListNeedsToBeUpdated(facts: MutableList<Fact>): Boolean {
     return facts.size == 0
 }
 
-class FactsFromTheNetPageActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            CatFactsTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    FactsFromTheNetComposable()
-                }
-            }
-        }
-    }
-}
 
 @Composable
 fun FactsFromTheNetComposable() {
