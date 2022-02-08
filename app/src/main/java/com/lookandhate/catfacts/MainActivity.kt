@@ -28,16 +28,22 @@ object AppMain {
         }
         return -1
     }
+
     const val factsFromTheNetPageTag = "download"
     const val favoritesFactsPageTag = "favorites"
+    val pageToDisplay = mutableStateOf<String>(factsFromTheNetPageTag)
+
 }
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val pageToDisplay: String = intent.getStringExtra("pageToDisplay") ?: AppMain.factsFromTheNetPageTag
-        Log.d("MainActivity",
-        "pageToDisplay is ${intent.getStringExtra("pageToDisplay")}")
+        val pageToDisplay: String =
+            intent.getStringExtra("pageToDisplay") ?: AppMain.factsFromTheNetPageTag
+        Log.d(
+            "MainActivity",
+            "pageToDisplay is ${intent.getStringExtra("pageToDisplay")}"
+        )
         setContent {
             CatFactsTheme {
                 // A surface container using the 'background' color from the theme
@@ -55,7 +61,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen(displayingPage: String = "download") {
     val context = LocalContext.current
-    val selectedItem = remember { mutableStateOf(displayingPage) }
+    val selectedItem = remember { mutableStateOf(AppMain.pageToDisplay.value) }
     Scaffold(
         bottomBar = {
             BottomAppBar {
