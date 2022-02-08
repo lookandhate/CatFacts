@@ -1,7 +1,6 @@
 package com.lookandhate.catfacts
 
 import android.os.Bundle
-import android.util.Log
 
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,7 +14,6 @@ import androidx.compose.material.icons.filled.Favorite
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 
 import com.lookandhate.catfacts.activities.FactsFromTheNetComposable
 import com.lookandhate.catfacts.activities.FavoritesComposable
@@ -41,12 +39,6 @@ object AppMain {
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val pageToDisplay: String =
-            intent.getStringExtra("pageToDisplay") ?: AppMain.factsFromTheNetPageTag
-        Log.d(
-            "MainActivity",
-            "pageToDisplay is ${intent.getStringExtra("pageToDisplay")}"
-        )
         setContent {
             CatFactsTheme {
                 // A surface container using the 'background' color from the theme
@@ -54,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MainScreen(pageToDisplay)
+                    MainScreen()
                 }
             }
         }
@@ -62,8 +54,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen(displayingPage: String = "download") {
-    val context = LocalContext.current
+fun MainScreen() {
     val selectedItem = remember { mutableStateOf(AppMain.pageToDisplay.value) }
     Scaffold(
         bottomBar = {
