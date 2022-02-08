@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import com.lookandhate.catfacts.activities.FactsFromTheNetComposable
 import com.lookandhate.catfacts.activities.FavoritesComposable
@@ -19,7 +20,7 @@ import com.lookandhate.catfacts.ui.theme.CatFactsTheme
 import com.lookandhate.catfacts.viewModels.Fact
 
 object AppMain {
-    var factList by mutableStateOf(mutableListOf<Fact>())
+    val factList = mutableStateListOf<Fact>()
     fun getFactIndexByItsText(text: String): Int {
         factList.forEach {
             if (it.factText == text)
@@ -55,13 +56,10 @@ class MainActivity : ComponentActivity() {
 fun MainScreen(displayingPage: String = "download") {
     val context = LocalContext.current
     val selectedItem = remember { mutableStateOf(displayingPage) }
-
-
     Scaffold(
         bottomBar = {
             BottomAppBar {
                 BottomNavigation() {
-
                     BottomNavigationItem(
                         icon = {
                             Icon(Icons.Filled.ArrowDropDown, "")
