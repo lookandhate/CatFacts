@@ -1,6 +1,5 @@
 package com.lookandhate.catfacts.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -20,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.lookandhate.catfacts.AppMain
 import com.lookandhate.catfacts.R
-import com.lookandhate.catfacts.MainActivity
 import com.lookandhate.catfacts.activities.ui.theme.CatFactsTheme
 import com.lookandhate.catfacts.viewModels.Fact
 import okhttp3.*
@@ -42,6 +40,12 @@ class FactActivity : ComponentActivity() {
         val request = Request.Builder()
             .url("https://aws.random.cat/meow")
             .build()
+
+        // Getting image of cat and writing it to activity public field.
+        // So we can get url later, when we will call Composable fun
+        //
+        // There actually cold be the method, to call FactPage, with url, but without saving it
+        // to FactActivity field. But i could not figure it out, YET
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
@@ -82,30 +86,17 @@ class FactActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val fact = intent.getParcelableExtra<Fact>("fact")
+                    val factToDispay = intent.getParcelableExtra<Fact>("fact")
                     Log.d(
                         "FactActivity",
-                        "Got $fact from intent, launching composable"
+                        "Got $factToDispay from intent, launching composable"
                     )
-                    FactPage(fact, this.url)
+                    FactPage(factToDispay, this.url)
                 }
             }
         }
 
     }
-
-
-    override fun onBackPressed() {
-        val launchIntent = Intent(this, MainActivity::class.java)
-        launchIntent.putExtra("pageToDisplay", intent.getStringExtra("fromPage"))
-        Log.d(
-            "FactActivity:onBackPressed",
-            "Launching MainActivity with intent $launchIntent"
-        )
-        startActivity(launchIntent)
-    }
-
-
 }
 
 @Composable
