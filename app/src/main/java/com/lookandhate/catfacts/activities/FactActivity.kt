@@ -86,12 +86,12 @@ class FactActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val factToDispay = intent.getParcelableExtra<Fact>("fact")
+                    val factToDisplay = intent.getParcelableExtra<Fact>("fact")
                     Log.d(
                         "FactActivity",
-                        "Got $factToDispay from intent, launching composable"
+                        "Got $factToDisplay from intent, launching composable"
                     )
-                    FactPage(factToDispay, this.url)
+                    FactPage(factToDisplay, this.url)
                 }
             }
         }

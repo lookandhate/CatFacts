@@ -38,7 +38,7 @@ fun FactCard(factToDisplay: Fact) {
 
                         intent.putExtra("fact", factToDisplay)
                         Log.d(
-                            "FavoritesComposable:Card:Row:Text",
+                            "FactCard",
                             "Starting FactActivity and passing $factToDisplay as fact"
                         )
                         context.startActivity(intent)
