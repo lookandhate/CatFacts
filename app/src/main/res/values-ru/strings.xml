@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CatFacts</string>
+    <string name="facts_from_net_page">Интернет</string>
+    <string name="favorites_facts">Избранные</string>
+    <string name="add_to_favorites">Добавить в избранное</string>
+    <string name="remove_from_favorites">Удалить из избранного</string>
+</resources>

@@ -14,9 +14,10 @@ import androidx.compose.material.icons.filled.Favorite
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 
 import com.lookandhate.catfacts.activities.FactsFromTheNetComposable
-import com.lookandhate.catfacts.activities.FavoritesComposable
+import com.lookandhate.catfacts.composables.FavoritesComposable
 import com.lookandhate.catfacts.ui.theme.CatFactsTheme
 import com.lookandhate.catfacts.viewModels.Fact
 
@@ -64,11 +65,10 @@ fun MainScreen() {
                         icon = {
                             Icon(Icons.Filled.ArrowDropDown, "")
                         },
-                        label = { Text(text = "Facts") },
+                        label = { Text(text = stringResource(R.string.facts_from_net_page)) },
                         selected = selectedItem.value == AppMain.factsFromTheNetPageTag,
                         onClick = {
                             selectedItem.value = AppMain.factsFromTheNetPageTag
-
                         },
                         alwaysShowLabel = false
                     )
@@ -77,7 +77,7 @@ fun MainScreen() {
                         icon = {
                             Icon(Icons.Filled.Favorite, "")
                         },
-                        label = { Text(text = "Favorite") },
+                        label = { Text(text = stringResource(R.string.favorites_facts)) },
                         onClick = {
                             selectedItem.value = AppMain.favoritesFactsPageTag
                         },
