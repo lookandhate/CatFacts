@@ -5,15 +5,18 @@ import android.util.Log
 
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+
 import androidx.compose.foundation.layout.fillMaxSize
+
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Favorite
+
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
+
 import com.lookandhate.catfacts.activities.FactsFromTheNetComposable
 import com.lookandhate.catfacts.activities.FavoritesComposable
 import com.lookandhate.catfacts.ui.theme.CatFactsTheme

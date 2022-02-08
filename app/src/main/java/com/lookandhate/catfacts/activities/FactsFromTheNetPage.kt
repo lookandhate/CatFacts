@@ -1,24 +1,10 @@
 package com.lookandhate.catfacts.activities
 
-import android.content.Intent
-import android.os.Bundle
+
 import android.util.Log
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import com.lookandhate.catfacts.AppMain
-import com.lookandhate.catfacts.ui.theme.CatFactsTheme
 import com.lookandhate.catfacts.viewModels.Fact
 import okhttp3.*
 import org.json.JSONArray
