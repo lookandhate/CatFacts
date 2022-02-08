@@ -24,7 +24,7 @@ fun FactCard(factToDisplay: Fact) {
         shape = RoundedCornerShape(3.dp),
         modifier = Modifier.padding(3.dp),
 
-        backgroundColor = Color.DarkGray
+        backgroundColor = Color.Gray
     ) {
         Row {
             val context = LocalContext.current
