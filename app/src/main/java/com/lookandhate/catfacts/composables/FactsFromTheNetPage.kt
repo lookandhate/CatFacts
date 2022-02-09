@@ -27,7 +27,6 @@ internal fun updateListOfFacts(facts: MutableList<Fact>) {
                 val arr = JSONArray(response.body!!.string())
 
                 for (i in 0 until arr.length()) {
-
                     val jsonObject = arr.getJSONObject(i)
                     val catFact = jsonObject.getString("text")
                     Log.d(
@@ -36,8 +35,6 @@ internal fun updateListOfFacts(facts: MutableList<Fact>) {
                     )
                     if (!facts.any { existedFact -> existedFact.factText == catFact })
                         facts.add(Fact(catFact, false))
-
-
                 }
                 Log.d(
                     "updateListOfFacts",
@@ -68,8 +65,8 @@ fun FactsFromTheNetComposable() {
     if (needToUpdateTheList) {
         updateListOfFacts(AppMain.factList)
     }
+
     Column {
-        //Text(text = text.value)
         Log.d(
             "FactsFromTheNetComposable",
             "OnRedraw, facts state: ${AppMain.factList.joinToString(", ")}"

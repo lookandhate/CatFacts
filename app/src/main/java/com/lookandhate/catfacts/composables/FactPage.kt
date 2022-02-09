@@ -19,28 +19,27 @@ import com.lookandhate.catfacts.activities.textForButton
 import com.lookandhate.catfacts.viewModels.Fact
 
 @Composable
-fun FactPage(factToDispay: Fact?, imageUrl: String?) {
+fun FactPage(factToDispay: Fact, imageUrl: String?) {
     Log.d("FactPage", "Got $factToDispay as fact")
-    val fact = factToDispay ?: Fact("Null", true)
+    val fact = factToDispay
     val checkedState = remember { mutableStateOf(fact.isFavorite) }
     val factIndexInArray = AppMain.getFactIndexByItsText(fact.factText)
     Column() {
-        Text(text = fact.factText,
-            modifier = Modifier.padding(5.dp))
-
+        Text(
+            text = fact.factText,
+            modifier = Modifier.padding(5.dp)
+        )
         Image(
             painter = rememberImagePainter(imageUrl,
                 builder = { placeholder(R.drawable.downloading_indicator) }),
             contentDescription = null,
             modifier = Modifier.size(800.dp),
-
-            )
+        )
     }
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.Bottom
     ) {
-
         Text(
             text = stringResource(textForButton(checkedState.value)),
             modifier = Modifier.clickable {

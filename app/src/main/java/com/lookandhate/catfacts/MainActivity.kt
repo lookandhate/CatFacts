@@ -42,7 +42,11 @@ object AppMain {
 
 }
 
-sealed class Screen(val route: String, @StringRes val screenLabelResource: Int, val icon: ImageVector) {
+sealed class Screen(
+    val route: String,
+    @StringRes val screenLabelResource: Int,
+    val icon: ImageVector
+) {
     object Download : Screen("download", R.string.facts_from_net_page, Icons.Filled.ArrowDropDown)
     object Favorites : Screen("favorites", R.string.favorites_facts_page, Icons.Filled.Favorite)
 }
@@ -72,7 +76,6 @@ fun MainScreen() {
         Screen.Download,
         Screen.Favorites
     )
-
     Scaffold(
         bottomBar = {
             BottomAppBar {
