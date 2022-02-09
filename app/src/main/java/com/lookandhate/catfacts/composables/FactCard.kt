@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,19 +24,20 @@ fun FactCard(factToDisplay: Fact) {
     Card(
         shape = RoundedCornerShape(3.dp),
         modifier = Modifier.padding(3.dp),
-
         backgroundColor = Color.Gray
     ) {
         Row {
             val context = LocalContext.current
-            Icon(Icons.Filled.Favorite, "favorite")
+            Icon(
+                if (factToDisplay.isFavorite) Icons.Filled.Favorite else Icons.Outlined.Favorite,
+                null
+            )
             Text(
                 text = factToDisplay.factText,
                 modifier = Modifier
                     .width(400.dp)
                     .clickable {
                         val intent = Intent(context, FactActivity::class.java)
-
 
                         intent.putExtra("fact", factToDisplay)
                         Log.d(
