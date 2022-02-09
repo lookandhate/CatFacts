@@ -64,11 +64,7 @@ fun FactsFromTheNetComposable() {
         "FactsFromTheNetComposable",
         "Checking, do we need to update list with facts: $needToUpdateTheList"
     )
-    if (needToUpdateTheList) {
-        updateListOfFacts(AppMain.factList)
-    }
-
-    Column(modifier = Modifier.placeholder(visible = checkListNeedsToBeUpdated(AppMain.factList))) {
+    Column(modifier = Modifier.placeholder(visible = needToUpdateTheList)) {
         Log.d(
             "FactsFromTheNetComposable",
             "OnRedraw, facts state: ${AppMain.factList.joinToString(", ")}"
@@ -77,5 +73,11 @@ fun FactsFromTheNetComposable() {
             FactCard(factToDisplay = fact)
         }
     }
+
+    if (needToUpdateTheList) {
+        updateListOfFacts(AppMain.factList)
+    }
+
+
 
 }
