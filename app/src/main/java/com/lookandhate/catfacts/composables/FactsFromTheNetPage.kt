@@ -4,6 +4,8 @@ package com.lookandhate.catfacts.composables
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import com.google.accompanist.placeholder.material.placeholder
 import com.lookandhate.catfacts.AppMain
 import com.lookandhate.catfacts.viewModels.Fact
 import okhttp3.*
@@ -66,7 +68,7 @@ fun FactsFromTheNetComposable() {
         updateListOfFacts(AppMain.factList)
     }
 
-    Column {
+    Column(modifier = Modifier.placeholder(visible = checkListNeedsToBeUpdated(AppMain.factList))) {
         Log.d(
             "FactsFromTheNetComposable",
             "OnRedraw, facts state: ${AppMain.factList.joinToString(", ")}"
